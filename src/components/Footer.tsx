@@ -6,7 +6,6 @@ export default function Footer() {
       <div
         className="p-6 md:p-8 !smax-md:bg-transparent"
         style={{
-          backgroundImage: `url(/bg.png)`,
           backgroundSize: "contain",
           backgroundPosition: "left",
           backgroundRepeat: "no-repeat",
