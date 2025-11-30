@@ -215,12 +215,12 @@ export default function Home() {
                 Tickets as NFTs. No middlemen, no hidden fees, full ownership.
                 Every transaction is verifiable on-chain.
               </p>
-              <Link href="/discover">
+              {/* <Link href="/discover">
                 <div className="border corner-accents flex hover:bg-accent/5 cursor-pointer hover:border-accent hover:text-accent transition-colors items-center justify-between px-2 py-2">
                   Learn More
                   <ArrowUpRight className="w-4 h-4 text-accent" />
                 </div>
-              </Link>
+              </Link> */}
             </div>
             <div className="flex flex-col md:flex-col divide-y md:divide-y">
               <div className="p-4 md:p-6 flex-1 flex flex-col justify-center hover:bg-muted/30 transition-colors">

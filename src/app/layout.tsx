@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "S-Tickets",
+  title: "Stickets",
   description:
     "The first truly transparent ticketing platform powered by Stellar",
 };
@@ -27,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={"dark"}>
+      <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+      </head>
       <body className={`${figtree.variable} ${geistMono.variable} antialiased`}>
         <QueryProvider>
           <AuthProvider>{children}</AuthProvider>

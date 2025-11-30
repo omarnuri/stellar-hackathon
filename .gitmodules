@@ -1,0 +1,3 @@
+[submodule "sticket-contracts"]
+	path = sticket-contracts
+	url = https://github.com/iamnotdou/sticket-contracts
