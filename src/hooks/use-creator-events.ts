@@ -1,3 +1,5 @@
+"use client";
+
 import { useQuery } from "@tanstack/react-query";
 import {
   Client as FactoryClient,
@@ -8,11 +10,10 @@ import {
   Client as NftClient,
   EventInfo,
 } from "../../sticket-contracts/packages/sticket-nft-collections/src/index";
+import type { EventMetadata, FullEventData } from "./use-all-events";
 
 const RPC_URL = "https://soroban-testnet.stellar.org";
 const NETWORK_PASSPHRASE = networks.testnet.networkPassphrase;
-
-// Convert stroops to XLM (1 XLM = 10,000,000 stroops)
 const STROOPS_TO_XLM = 10_000_000;
 
 function createFactoryClient(): FactoryClient {
@@ -31,46 +32,12 @@ function createNftClient(contractId: string): NftClient {
   });
 }
 
-// Metadata structure (from IPFS)
-export interface EventMetadata {
-  description?: string;
-  dateTime?: string;
-  locationAddress?: string;
-  category?: string;
-  image?: string;
-  contact?: string;
-  secondaryMarketFee?: number;
-}
-
-// Full event data including price and availability
-export interface FullEventData {
-  // From factory
-  id: number;
-  name: string;
-  symbol: string;
-  event_contract: string;
-  event_creator: string;
-  created_at: number;
-  // From NFT contract
-  total_supply: number;
-  tickets_available: number;
-  tickets_minted: number;
-  primary_price: number; // In XLM
-  primary_price_stroops: bigint;
-  creator_fee_bps: number;
-  event_metadata: string;
-  payment_token: string;
-  // Parsed metadata
-  metadata?: EventMetadata | null;
-}
-
 async function fetchMetadata(
   metadataUrl: string
 ): Promise<EventMetadata | null> {
   if (!metadataUrl) return null;
 
   try {
-    // Handle IPFS URLs
     let fetchUrl = metadataUrl;
     if (metadataUrl.startsWith("ipfs://")) {
       const cid = metadataUrl.replace("ipfs://", "");
@@ -96,7 +63,6 @@ async function fetchEventDetails(eventContract: string): Promise<{
   try {
     const nftClient = createNftClient(eventContract);
 
-    // Fetch event info and ticket counts in parallel
     const [eventInfoTx, availableTx, mintedTx] = await Promise.all([
       nftClient.get_event_info(),
       nftClient.get_tickets_available(),
@@ -111,7 +77,6 @@ async function fetchEventDetails(eventContract: string): Promise<{
 
     const eventInfo = (eventInfoResult.result as EventInfo) || null;
 
-    // Fetch metadata from IPFS
     const metadata = eventInfo?.event_metadata
       ? await fetchMetadata(eventInfo.event_metadata)
       : null;
@@ -133,13 +98,15 @@ async function fetchEventDetails(eventContract: string): Promise<{
   }
 }
 
-async function fetchAllEvents(): Promise<FullEventData[]> {
+async function fetchCreatorEvents(
+  creatorAddress: string
+): Promise<FullEventData[]> {
   const factoryClient = createFactoryClient();
-  const tx = await factoryClient.get_all_events();
+  const tx = await factoryClient.get_creator_events({ creator: creatorAddress });
   const result = await tx.simulate();
 
   if (result.result === undefined) {
-    throw new Error("Failed to fetch events from factory");
+    return [];
   }
 
   const events = result.result as EventRecord[];
@@ -150,14 +117,12 @@ async function fetchAllEvents(): Promise<FullEventData[]> {
       const details = await fetchEventDetails(event.event_contract);
 
       return {
-        // From factory
         id: index,
         name: event.name,
         symbol: event.symbol,
         event_contract: event.event_contract,
         event_creator: event.event_creator,
         created_at: Number(event.created_at),
-        // From NFT contract
         total_supply: details.eventInfo?.total_supply || 0,
         tickets_available: details.ticketsAvailable,
         tickets_minted: details.ticketsMinted,
@@ -168,7 +133,6 @@ async function fetchAllEvents(): Promise<FullEventData[]> {
         creator_fee_bps: details.eventInfo?.creator_fee_bps || 0,
         event_metadata: details.eventInfo?.event_metadata || "",
         payment_token: details.eventInfo?.payment_token || "",
-        // Parsed metadata
         metadata: details.metadata,
       };
     })
@@ -177,29 +141,26 @@ async function fetchAllEvents(): Promise<FullEventData[]> {
   return eventsWithDetails;
 }
 
-export function useAllEvents() {
+export function useCreatorEvents(creatorAddress: string | null | undefined) {
   return useQuery({
-    queryKey: ["sticket-factory", "all-events"],
-    queryFn: fetchAllEvents,
+    queryKey: ["creator-events", creatorAddress],
+    queryFn: () => fetchCreatorEvents(creatorAddress!),
+    enabled: !!creatorAddress,
     staleTime: 30 * 1000, // 30 seconds
   });
 }
 
-// Direct event count from contract (optimized - doesn't fetch all events)
-async function fetchEventCount(): Promise<number> {
-  const factoryClient = createFactoryClient();
-  const tx = await factoryClient.get_event_count();
-  const result = await tx.simulate();
-  return (result.result as number) || 0;
+// Calculate total revenue from ticket sales
+export function calculateRevenue(events: FullEventData[]): number {
+  return events.reduce((total, event) => {
+    return total + event.tickets_minted * event.primary_price;
+  }, 0);
 }
 
-export function useEventCount() {
-  return useQuery({
-    queryKey: ["sticket-factory", "event-count"],
-    queryFn: fetchEventCount,
-    staleTime: 60 * 1000, // 1 minute
-  });
+// Calculate total tickets sold across all events
+export function calculateTotalTicketsSold(events: FullEventData[]): number {
+  return events.reduce((total, event) => total + event.tickets_minted, 0);
 }
 
-// Export helpers
-export { createFactoryClient, createNftClient, STROOPS_TO_XLM };
+export default useCreatorEvents;
+

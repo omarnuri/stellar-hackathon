@@ -5,7 +5,7 @@ import { MainLayout } from "@/components/layouts";
 import { Button } from "@/components/ui/button";
 import { Search, X, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useAllEvents, type FullEventData } from "@/hooks/use-all-events";
+import { useAllEvents, useEventCount, type FullEventData } from "@/hooks/use-all-events";
 import { CATEGORIES } from "../create/create-event-form";
 
 // Placeholder images for events
@@ -85,6 +85,7 @@ function filterEvents(
 
 export default function DiscoverPage() {
   const { data: events, isLoading, error } = useAllEvents();
+  const { data: eventCount } = useEventCount();
 
   // Search and filter state
   const [searchQuery, setSearchQuery] = useState("");
@@ -100,7 +101,7 @@ export default function DiscoverPage() {
   const categories = useMemo(() => {
     const baseEvents = searchQuery ? filteredEvents : events;
     return [
-      { name: "All", count: events?.length || 0 },
+      { name: "All", count: eventCount ?? events?.length ?? 0 },
       ...CATEGORIES.map((category) => ({
         name: category,
         count:
@@ -109,7 +110,7 @@ export default function DiscoverPage() {
           ).length || 0,
       })),
     ];
-  }, [events, filteredEvents, searchQuery]);
+  }, [events, filteredEvents, searchQuery, eventCount]);
 
   return (
     <MainLayout>

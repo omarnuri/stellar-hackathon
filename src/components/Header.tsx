@@ -9,6 +9,7 @@ import {
   Compass,
   Copy,
   ExternalLink,
+  FolderKanban,
   LogOut,
   Plus,
   Ticket,
@@ -42,6 +43,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 const navigationLinks: { href: string; label: string; icon: LucideIcon }[] = [
   { href: "/discover", label: "Discover", icon: Compass },
   { href: "/tickets", label: "My Tickets", icon: Ticket },
+  { href: "/my-events", label: "My Events", icon: FolderKanban },
   { href: "/create", label: "Create Event", icon: CalendarPlus },
 ];
 
@@ -153,6 +155,12 @@ function WalletDisplay() {
               <Link href="/tickets">
                 <Ticket />
                 My Tickets
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild className="cursor-pointer">
+              <Link href="/my-events">
+                <FolderKanban />
+                My Events
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem
@@ -308,6 +316,15 @@ export default function Header({ variant = "default" }: HeaderProps) {
                       href="/tickets"
                     >
                       My Tickets
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <NavigationMenuLink
+                      active={pathname === "/my-events"}
+                      className="py-1.5 font-medium text-muted-foreground hover:text-primary"
+                      href="/my-events"
+                    >
+                      My Events
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 </NavigationMenuList>

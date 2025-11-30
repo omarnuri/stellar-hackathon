@@ -81,14 +81,10 @@ async function fetchMetadata(
 
   try {
     // Handle IPFS URLs
-    let fetchUrl = metadataUrl;
-    if (metadataUrl.startsWith("ipfs://")) {
-      const cid = metadataUrl.replace("ipfs://", "");
-      fetchUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
-    }
+    const fetchUrl = metadataUrl;
 
-    console.log(metadataUrl);
     const response = await fetch(fetchUrl);
+    console.log(response);
     if (!response.ok) return null;
 
     return await response.json();

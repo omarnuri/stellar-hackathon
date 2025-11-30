@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { FreighterConnect } from "@/components/FreighterConnect";
-import { useAllEvents, type FullEventData } from "@/hooks/use-all-events";
+import { useAllEvents, useEventCount, type FullEventData } from "@/hooks/use-all-events";
 import { useMemo } from "react";
 
 // Format timestamp to readable date
@@ -69,6 +69,7 @@ function getEventImage(event: FullEventData): string {
 
 export default function Home() {
   const { data: events, isLoading, error } = useAllEvents();
+  const { data: eventCount } = useEventCount();
 
   // Get top 3 events for display
   const displayEvents = useMemo(() => {
@@ -101,13 +102,14 @@ export default function Home() {
 
   // Stats calculated from live data
   const stats = useMemo(() => {
-    if (!events) return { totalEvents: 0, ticketsSold: 0, totalAvailable: 0 };
+    if (!events) return { totalEvents: eventCount ?? 0, ticketsSold: 0, totalAvailable: 0 };
     return {
-      totalEvents: events.length,
+      // Use direct event count from contract if available, otherwise fall back to events length
+      totalEvents: eventCount ?? events.length,
       ticketsSold: events.reduce((sum, e) => sum + e.tickets_minted, 0),
       totalAvailable: events.reduce((sum, e) => sum + e.tickets_available, 0),
     };
-  }, [events]);
+  }, [events, eventCount]);
 
   const features = [
     {
