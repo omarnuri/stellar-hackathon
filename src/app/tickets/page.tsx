@@ -244,7 +244,15 @@ export default function MyTicketsPage() {
         {/* Header Section */}
         <div className="border border-t-0 corner-accents">
           <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x">
-            <div className="md:col-span-2 p-6 space-y-3 border-b md:border-b-0">
+            <div 
+              className="md:col-span-2 p-6 space-y-3 border-b md:border-b-0"
+              style={{
+                backgroundImage: `url(/WhatsApp%20Görsel%202025-11-29%20saat%2019.52.21_bab4c795.png)`,
+                backgroundSize: "contain",
+                backgroundPosition: "right center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
               <div className="flex items-center gap-3">
                 {isConnected && publicKey && (
                   <div className="text-xs text-accent font-mono ">

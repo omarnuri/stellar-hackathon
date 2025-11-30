@@ -389,9 +389,9 @@ export default function Home() {
         <div
           className="p-6 md:p-8 border-b"
           style={{
-            backgroundImage: `url(/bg.png)`,
+            backgroundImage: `url(/WhatsApp%20Görsel%202025-11-29%20saat%2020.28.56_af709104.jpg)`,
             backgroundSize: "contain",
-            backgroundPosition: "right",
+            backgroundPosition: "right center",
             backgroundRepeat: "no-repeat",
           }}
         >
