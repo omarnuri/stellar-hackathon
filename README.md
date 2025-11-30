@@ -19,6 +19,55 @@ A decentralized event ticketing platform built on **Stellar** that transforms ti
 - **Wallet Integration**: Connect with Freighter wallet
 - **IPFS Storage**: Decentralized metadata and image storage via Pinata
 
+## ⭐ Why Stellar? Outstanding Features
+
+Sticket leverages Stellar's unique advantages to deliver the best ticketing experience:
+
+### ⚡ Lightning-Fast Transactions
+
+- **~5 second finality** - Instant ticket delivery, no waiting
+- Real-time ticket availability updates
+- Immediate confirmation for buyers and sellers
+
+### 💰 Ultra-Low Costs
+
+- **~$0.00001 per transaction** - Less than a cent per ticket operation
+- Makes micro-transactions economically viable
+- Enables affordable ticket pricing for all event types
+
+### 🔧 Soroban Smart Contracts
+
+- **Rust-based contracts** - Secure, auditable, and performant
+- Factory pattern for efficient event deployment
+- Built-in secondary marketplace and royalty system
+- On-chain ticket validation to prevent fraud
+
+### 🌍 Global & Permissionless
+
+- **No geographic restrictions** - Access from anywhere in the world
+- No KYC requirements for basic ticket operations
+- Borderless event ticketing
+
+### 💎 Native XLM Integration
+
+- **Direct XLM payments** - No wrapped tokens or complex conversions
+- Organizers receive payments instantly in native Stellar Lumens
+- Simple, straightforward payment flow
+
+### 🏭 Efficient Contract Deployment
+
+- **Factory pattern** - Deploy new event contracts in seconds
+- Deterministic contract addresses
+- Reduced gas costs through contract reuse
+
+### 🔐 Built-in Security
+
+- **On-chain verification** - All tickets are immutable NFTs
+- Smart contract enforced royalties
+- Fraud prevention through blockchain validation
+
+**Stellar is the perfect blockchain for ticketing** - combining speed, low cost, and powerful smart contract capabilities that make decentralized ticketing not just possible, but superior to traditional solutions.
+
 ## 🚀 Quick Start
 
 ### Prerequisites

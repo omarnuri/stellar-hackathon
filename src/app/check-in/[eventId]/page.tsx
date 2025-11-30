@@ -1,26 +1,26 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { FreighterConnect } from "@/components/FreighterConnect";
 import { MainLayout } from "@/components/layouts";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useCheckIn, type CheckInResult } from "@/hooks/use-check-in";
+import { useEventDetails } from "@/hooks/use-event-details";
+import { useFreighter } from "@/providers/FreighterProvider";
 import {
+  AlertCircle,
   ArrowLeft,
   Camera,
   Check,
   Loader2,
   QrCode,
+  RefreshCw,
   Ticket,
   X,
-  AlertCircle,
-  RefreshCw,
 } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useFreighter } from "@/providers/FreighterProvider";
-import { FreighterConnect } from "@/components/FreighterConnect";
-import { useCheckIn, type CheckInResult } from "@/hooks/use-check-in";
-import { useEventDetails } from "@/hooks/use-event-details";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface CheckInHistory {
   ticketId: number;
@@ -36,13 +36,8 @@ export default function CheckInPage() {
   const { isConnected, publicKey } = useFreighter();
   const { data: eventDetails, isLoading: eventLoading } =
     useEventDetails(eventId);
-  const {
-    isProcessing,
-    lastResult,
-    markTicketUsed,
-    processQRCode,
-    reset,
-  } = useCheckIn(eventId);
+  const { isProcessing, lastResult, markTicketUsed, reset } =
+    useCheckIn(eventId);
 
   const [manualTicketId, setManualTicketId] = useState("");
   const [checkInHistory, setCheckInHistory] = useState<CheckInHistory[]>([]);
@@ -313,7 +308,9 @@ export default function CheckInPage() {
                     placeholder="Enter Ticket ID..."
                     value={manualTicketId}
                     onChange={(e) => setManualTicketId(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleManualCheckIn()}
+                    onKeyDown={(e) =>
+                      e.key === "Enter" && handleManualCheckIn()
+                    }
                     min={0}
                     className="flex-1"
                   />
@@ -357,7 +354,9 @@ export default function CheckInPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-lg">
-                        {lastResult.success ? "Check-In Successful!" : "Check-In Failed"}
+                        {lastResult.success
+                          ? "Check-In Successful!"
+                          : "Check-In Failed"}
                       </h3>
                       <p className="text-sm text-muted-foreground">
                         Ticket #{lastResult.ticketId} — {lastResult.message}
@@ -389,7 +388,9 @@ export default function CheckInPage() {
                 <div className="divide-y max-h-64 overflow-y-auto">
                   {checkInHistory.map((entry, index) => (
                     <div
-                      key={`${entry.ticketId}-${entry.timestamp.getTime()}-${index}`}
+                      key={`${
+                        entry.ticketId
+                      }-${entry.timestamp.getTime()}-${index}`}
                       className="p-3 flex items-center justify-between hover:bg-muted/30 transition-colors"
                     >
                       <div className="flex items-center gap-3">
@@ -430,4 +431,3 @@ export default function CheckInPage() {
     </MainLayout>
   );
 }
-

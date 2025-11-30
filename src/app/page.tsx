@@ -2,14 +2,13 @@
 import Dither from "@/components/Dither";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Loader2 } from "lucide-react";
-import Link from "next/link";
-import { FreighterConnect } from "@/components/FreighterConnect";
 import {
   useAllEvents,
   useEventCount,
   type FullEventData,
 } from "@/hooks/use-all-events";
+import { ArrowUpRight, Loader2 } from "lucide-react";
+import Link from "next/link";
 import { useMemo } from "react";
 
 // Format timestamp to readable date
