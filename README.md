@@ -19,7 +19,7 @@ I was a core developer in the team that built this Web3 Ticketing Platform durin
 * **Frontend Architecture:** Built key UI components using Next.js 15 & Tailwind CSS with a "Retro Tech" aesthetic.
 * **Web3 Integration:** Connected frontend logic with Stellar blockchain smart contracts for real-time NFT ticketing.
 
-### 📸 Proof of Work
+### 📸 Presentation
 <p align="center">
   <img src="A5713T01.jpg" width="45%" alt="Hackathon coding process" style="border-radius: 10px; margin-right: 10px;">
   <img src="B5235T01 (2).jpg" width="45%" alt="Hackathon team" style="border-radius: 10px;">
