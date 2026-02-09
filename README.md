@@ -6,6 +6,29 @@ A decentralized event ticketing platform built on **Stellar** that transforms ti
 
 **🔗 [View Live Application](https://stellar-hackathon-85lb.vercel.app)**
 
+---
+
+## 🚀 Hackathon Experience & My Contribution
+
+**Built in 48 hours. No sleep, pure code.**
+
+I was a core developer in the team that built this Web3 Ticketing Platform during the **Stellar Hackathon**.
+
+### 👨‍💻 My Role
+* **Gamification Logic:** Designed and implemented user engagement mechanics and reward systems.
+* **Frontend Architecture:** Built key UI components using Next.js 15 & Tailwind CSS with a "Retro Tech" aesthetic.
+* **Web3 Integration:** Connected frontend logic with Stellar blockchain smart contracts for real-time NFT ticketing.
+
+### 📸 Proof of Work
+<p align="center">
+  <img src="A5713T01.jpg" width="45%" alt="Hackathon coding process" style="border-radius: 10px; margin-right: 10px;">
+  <img src="B5235T01 (2).jpg" width="45%" alt="Hackathon team" style="border-radius: 10px;">
+</p>
+
+> *"Coding for 48 hours straight taught me more about deadlines, Web3, and teamwork than a whole semester."*
+
+---
+
 ## ✨ Features
 
 - **NFT-Based Tickets**: Each ticket is a unique, verifiable NFT on Stellar
@@ -83,30 +106,19 @@ Sticket leverages Stellar's unique advantages to deliver the best ticketing expe
 bun install
 # or
 npm install
+Environment Setup
 ```
 
-### Environment Setup
 
-Create a `.env.local` file in the root directory:
+Create a .env.local file in the root directory:
 
-```env
+
+```bash
 NEXT_PUBLIC_STELLAR_NETWORK=testnet
 NEXT_PUBLIC_FACTORY_CONTRACT_ID=your_factory_contract_id
 NEXT_PUBLIC_PINATA_JWT=your_pinata_jwt_token
 ```
-
-### Development
-
-```bash
-# Start development server
-bun dev
-# or
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Build
+Open http://localhost:3000 in your browser.
 
 ```bash
 # Build for production
@@ -115,178 +127,53 @@ bun run build
 npm run build
 ```
 
-## 📚 Documentation
+🏗️ Tech Stack
+Frontend
+Framework: Next.js 15.5.6 (App Router)
 
-For detailed information about the project, architecture, and development guidelines, see **[PROJECT_GUIDE.md](./info/PROJECT_GUIDE.md)**.
+Language: TypeScript
 
-For smart contract documentation, see **[sticket-contracts/README.md](./sticket-contracts/README.md)**.
+Styling: Tailwind CSS v4
 
-Additional documentation:
+UI Components: Radix UI + shadcn/ui
 
-- **[CONTRACTS.md](./info/CONTRACTS.md)** - Smart contract details
-- **[PITCH_DECK.md](./PITCH_DECK.md)** - Project pitch and vision
+3D Graphics: Three.js + React Three Fiber
 
-## 🏗️ Tech Stack
+Forms: React Hook Form + Zod
 
-### Frontend
+State Management: TanStack Query (React Query)
 
-- **Framework**: Next.js 15.5.6 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS v4
-- **UI Components**: Radix UI + shadcn/ui
-- **3D Graphics**: Three.js + React Three Fiber
-- **Forms**: React Hook Form + Zod
-- **State Management**: TanStack Query (React Query)
-- **Animations**: GSAP
+Animations: GSAP
 
-### Blockchain
+Blockchain
+Network: Stellar (Soroban smart contracts)
 
-- **Network**: Stellar (Soroban smart contracts)
-- **Wallet**: Freighter
-- **SDK**: @stellar/stellar-sdk, @stellar/freighter-api
-- **Storage**: IPFS via Pinata
+Wallet: Freighter
 
-### Smart Contracts
+SDK: @stellar/stellar-sdk, @stellar/freighter-api
 
-- **Language**: Rust
-- **Platform**: Soroban (Stellar)
-- **Contracts**: Factory pattern for event deployment, NFT collections for tickets
+Storage: IPFS via Pinata
 
-## 📁 Project Structure
+Smart Contracts
+Language: Rust
 
-```
-sticket/
-├── src/
-│   ├── app/                    # Next.js App Router pages
-│   │   ├── page.tsx            # Landing page
-│   │   ├── create/             # Event creation
-│   │   ├── discover/           # Event discovery & browsing
-│   │   ├── tickets/             # User's ticket collection
-│   │   ├── my-events/          # Creator's event management
-│   │   ├── check-in/           # Event check-in system
-│   │   ├── rewards/            # Rewards system
-│   │   └── api/                # API routes
-│   ├── components/             # React components
-│   │   ├── marketplace/        # Secondary market components
-│   │   ├── tickets/            # Ticket-related components
-│   │   └── ui/                 # shadcn/ui components
-│   ├── hooks/                  # Custom React hooks
-│   │   ├── use-all-events.ts   # Event fetching
-│   │   ├── use-create-event.ts # Event creation
-│   │   ├── use-ticket-actions.ts # Ticket operations
-│   │   └── ...
-│   ├── lib/                    # Utilities
-│   │   ├── pinata.ts           # IPFS upload
-│   │   └── utils.ts            # Helper functions
-│   └── providers/              # Context providers
-│       ├── AuthProvider.tsx    # Authentication
-│       ├── FreighterProvider.tsx # Wallet connection
-│       └── QueryProvider.tsx   # React Query setup
-├── sticket-contracts/          # Smart contracts
-│   ├── contracts/
-│   │   ├── factory/            # Factory contract
-│   │   └── nft_collections/     # NFT ticket contract
-│   └── packages/               # TypeScript SDKs
-├── public/                     # Static assets
-└── package.json
-```
+Platform: Soroban (Stellar)
 
-## 🎯 Current Status
+Contracts: Factory pattern for event deployment, NFT collections for tickets
 
-### ✅ Implemented
+🤝 Contributing
+Contributions are welcome!
 
-#### Frontend
+Fork the repository
 
-- Complete UI/UX design system with retro tech aesthetic
-- All page layouts and routing
-- Component library (shadcn/ui)
-- Responsive design
-- Animated visual effects (Dither background)
-- Wallet connection (Freighter)
-- Event creation flow
-- Event discovery and browsing
-- Ticket management (view, send, sell)
-- Secondary marketplace
-- Check-in system
-- Rewards system
-- IPFS integration for metadata
+Create your feature branch (git checkout -b feature/amazing-feature)
 
-#### Smart Contracts
+Commit your changes (git commit -m 'Add amazing feature')
 
-- Factory contract for event deployment
-- NFT collections contract for tickets
-- Primary and secondary market functionality
-- Creator royalties
-- Ticket validation/check-in
-- TypeScript SDKs generated
+Push to the branch (git push origin feature/amazing-feature)
 
-### 🚧 In Progress / Planned
+Open a Pull Request
 
-- Mainnet deployment
-- Enhanced analytics dashboard
-- Mobile app
-- Additional wallet integrations
-- Advanced filtering and search
-- Event analytics for creators
+<p align="center"> Built with ❤️ on Stellar </p>
 
-## 🔗 Key Pages
 
-- **Landing** (`/`) - Hero, features, live events
-- **Discover** (`/discover`) - Browse all events
-- **Event Details** (`/discover/[id]`) - View event and buy tickets
-- **Create Event** (`/create`) - Deploy new event contracts
-- **My Tickets** (`/tickets`) - View and manage your NFT tickets
-- **My Events** (`/my-events`) - Manage events you created
-- **Check-in** (`/check-in/[eventId]`) - Validate tickets at events
-- **Rewards** (`/rewards`) - View rewards and achievements
-
-## 🛠️ Development
-
-### Running Tests
-
-```bash
-# Frontend linting
-bun run lint
-
-# Smart contract tests
-cd sticket-contracts
-cargo test
-```
-
-### Deploying Contracts
-
-See [sticket-contracts/README.md](./sticket-contracts/README.md) for detailed deployment instructions.
-
-```bash
-cd sticket-contracts
-./deploy.sh
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read the [PROJECT_GUIDE.md](./info/PROJECT_GUIDE.md) for development guidelines.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📖 Learn More
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Radix UI](https://www.radix-ui.com)
-- [Stellar Documentation](https://developers.stellar.org/)
-- [Soroban Documentation](https://soroban.stellar.org/)
-- [Freighter Wallet](https://freighter.app/)
-
-## 📄 License
-
-[Add your license here]
-
----
-
-<p align="center">
-  Built with ❤️ on Stellar
-</p>
